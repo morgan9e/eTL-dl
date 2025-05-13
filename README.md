@@ -4,7 +4,9 @@ Download all files from lectures of SNU eTL.
 
 Skips already downloaded files
 
-+) 2FA verification code (mail) required.
+Creates locally saved virtual Passkey to reuse after
+
+First time registration required, passkey info is stored at `snu_fido.json`.
 
 ### Usage
 

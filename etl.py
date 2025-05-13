@@ -59,7 +59,7 @@ def get_subpath(dir, parent = []):
 
 
 def sync_etl(lecture, name = ""):
-    basepath = "."
+    basepath = "./download"
     root = rget(f"{API}/v1/courses/{lecture}/folders/root")
     print()
     print(f"{root['id']} {root['full_name']}")
