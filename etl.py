@@ -5,16 +5,11 @@ import sys
 from datetime import datetime
 from login import etl_login
 
-UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
-
 sess = etl_login()
 csrf = sess.cookies.get('_csrf_token')
 CSRF = urllib.parse.unquote(csrf)
 
-auth = {
-    "user-agent": UA,
-    "X-CSRF-Token": CSRF,
-}
+auth = { "X-CSRF-Token": CSRF }
 
 API = "https://myetl.snu.ac.kr/api"
 
@@ -59,7 +54,7 @@ def get_subpath(dir, parent = []):
 
 
 def sync_etl(lecture, name = ""):
-    basepath = "./download"
+    basepath = "./"
     root = rget(f"{API}/v1/courses/{lecture}/folders/root")
     print()
     print(f"{root['id']} {root['full_name']}")
@@ -70,7 +65,7 @@ def sync_etl(lecture, name = ""):
         local_dir = "/".join([i.replace(" ","_") for i in [i for i in file['path'] if i != "unfiled"]])
         if basepath:
             local_dir = os.path.join(basepath, local_dir)
-        local_path = os.path.join(local_dir, file['display_name'].replace(" ","+"))
+        local_path = os.path.join(local_dir, file['display_name'])
         
         if not os.path.exists(local_dir):
             os.makedirs(local_dir, exist_ok=True)
